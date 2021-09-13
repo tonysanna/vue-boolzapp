@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>BOOLZAPP</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
             <div class="col-left">
                 <div class="profile">
                     <div class="user">
-                        <img src="" alt="profile">
+                        <img src="img/avatar_2.jpg" alt="profile">
                         <span>Antonio Sanna</span>
                     </div>
                     <div class="options"></div>
@@ -32,9 +33,27 @@
                         <a href="">Attiva notifiche desktop</a>
                     </div>
                 </div>
-                
+                <div class="search">
+                    <div class="icon-search">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="input-search">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                    </div>
+                </div>
+                <div class="contact">
+                    <div class="people"></div>
+                    <img src="" alt="">
+                    <div class="name-people">
+                        <span></span>
+                        <span>Marco</span>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="col-right"></div>
     </div>
+    <script src="js/main.js"></script> 
 </body>
 </html>
