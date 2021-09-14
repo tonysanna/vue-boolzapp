@@ -42,11 +42,11 @@
                     </div>
                 </div>
                 <div class="contact">
-                    <div class="people">
-                        <img src="" alt="">
+                    <div v-for="(contact,index) in filterContacts" @click="getUser(contact)" class="people">
+                        <img :src="getAvatarPhoto(contact)" alt="contact.name">
                         <div class="name-people">
-                            <span></span>
-                            <span>Marco</span>
+                            <span>{{contact.name}}</span>
+                            <span>{{lastMessage(contact)}}</span>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,9 @@
             <div class="col-right">
                 <div class="receveir">
                     <div class="receveir-sx">
-                        <img src="" alt="">
+                        <img :src="getAvatarPhoto(selectedContact)" alt="">
                         <div class="receveir-info">
-                            <span></span>
+                            <span>{{selectedContact?.name}}</span>
                             <p>Ultimo accesso oggi alle </p>
                         </div>
                     </div>
