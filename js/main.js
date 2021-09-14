@@ -92,6 +92,25 @@ const app = new Vue ({
     mounted() {
         this.selectedContact = this.contacts[0]
     },
+    methods: {
+        getAvatarPhoto(contact) {
+            if(contact == null) {
+                return '';
+            }
+            return 'img/avatar' + contact.avatar + '.jpg'
+        },
+        getUser(contact) {
+            this.selectedContact = contact;
+            console.log(this.selectedContact);
+        },
+
+        LastMessage(contact) {
+            if (contact.messages == null) {
+                return contact.messages[contact.messages.lenght - 1].message
+            };
+
+        }
+    }
 })
 
 
