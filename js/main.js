@@ -3,6 +3,9 @@ Vue.config.devtools = true;
 const app = new Vue ({
     el:'#root',
     data:{
+        searchContact: '',
+        newMessage: '',
+        activeContact: 0,
         contacts: [
             {
                 name: 'Michele',
@@ -85,52 +88,53 @@ const app = new Vue ({
                 ],
             },
         ],
-        selectedContact: null,
-        newMessage: '',
-        search: '',
+        
     },
-    mounted() {
-        this.selectedContact = this.contacts[0]
-    },
+    
     methods: {
-        getAvatarPhoto(contact) {
-            if(contact == null) {
-                return '';
-            }
-            return 'img/avatar' + contact.avatar + '.jpg'
-        },
-        getUser(contact) {
-            this.selectedContact = contact;
-            console.log(this.selectedContact);
+        getActiveContact(index) {
+            this.activeContact = index;
         },
 
-        LastMessage(contact) {
-            if (contact.messages == null) {
-               return '';
+        sendMessage() {
+            if (this.newMessage != ''){
+                this.contacts[this.activeContact].messages.push(
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: this.newMessage,
+                        status: 'sent'
+                    }
+                );
             }
-            return contact.messages[contact.messages.lenght - 1].message
-        },
+            this.newMessage = '';      
 
-        addMessage() {
-            if(this.newMessage != '') {
-                let newMessage = this.newMessage;
-                let tmp = {
-                    date: fayjs().format('DD/MM/YYYY hh:mm:ss'),
-                    message: newMessage,
-                    status: 'sent',
-                };
-                this.selectedContact.messages.push(tmp);
-                this.newMessage = '';
-            }
             setTimeout(() => {
-                let tmp = {
-                    date: dayjs().format('DD/MM/YYYY hh:mm:ss'),
-                    message: 'ok',
-                    status: 'received',
-                };
-                this.selectedContact.messages.push(tmp);
-            },2500);
+                this.contacts[this.activeContact].messages.push(
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'ok',
+                        status: 'received'
+                    }
+                );
+            }, 1000);
+        },
+
+        searchList() {
+            this.contacts.forEach(element => {
+                let upperSearch = this.searchContact.toUpperCase();
+                let upperName = element.name.toUpperCase();
+                if(upperSearch == '') {
+                    element.visible = true;
+                }
+                else if(!upperName.includes(upperSearch)) {
+                    element.visible = false;
+                }else {
+                    element.visible = true;
+                }
+            });
         }
+        
+        
     }
 })
 

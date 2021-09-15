@@ -39,26 +39,29 @@
                         <i class="fas fa-search"></i>
                     </div>
                     <div class="input-search">
-                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model='search'>
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model='searchContact' @keyUp='searchList'>
                     </div>
                 </div>
                 <div class="contact">
-                    <div v-for="(contact,index) in filterContacts" @click="getUser(contact)" class="people">
-                        <img :src="getAvatarPhoto(contact)" alt="contact.name">
-                        <div class="name-people">
-                            <span>{{contact.name}}</span>
-                            <span>{{lastMessage(contact)}}</span>
+                    <template v-for="(contact,index) in contacts" >
+                        <div v-if='contact.visible == true'@click="getActiveContact(index)" class="people">
+                            <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="contact.name">
+                            <div class="name-people">
+                                <span>{{contact.name}}</span>
+                                <span></span>
+                            </div>
                         </div>
-                    </div>
+                    </template>
+                   
                 </div>
             </div>
 
             <div class="col-right">
                 <div class="receveir">
                     <div class="receveir-sx">
-                        <img :src="getAvatarPhoto(selectedContact)" alt="">
+                        <img :src="'img/avatar' + contacts[activeContact].avatar + '.jpg' " alt="">
                         <div class="receveir-info">
-                            <span>{{selectedContact?.name}}</span>
+                            <span>{{contacts[activeContact].name}}</span>
                             <p>Ultimo accesso oggi alle </p>
                         </div>
                     </div>
@@ -70,16 +73,16 @@
                     </div>
                 </div>
                 <div class="chat">
-                    <div v-for='text in selectedContact?.message' class="chat-space">
-                        <div :class="text.status">  
-                            <p> {{text.message}}</p>
-                            <span id="data-chat">{{text.date}}</span>
+                    <template v-for='(messageData,index) in contacts[activeContact].messages' class="chat-space">
+                        <div class="text.status">  
+                            <p>{{messageData.message}}</p>
+                            <span id="data-chat">{{messageData.date}}</span>
                         </div>
-                    </div>
+                    </template>
                 </div>
                 <div class="message">
                     <i class="fas fa-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="addMessage()">
+                    <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyUp.enter='sendMessage' >
                     <i class="fas fa-microphone"></i>
                 </div>
             </div>

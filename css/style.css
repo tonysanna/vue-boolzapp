@@ -25,7 +25,7 @@ body {
 
 .col-left {
     float: left;
-    width: 498px;
+    width: 30%;
     height: 100%;
 }
 
@@ -166,7 +166,7 @@ body {
 
 .col-right {
     float: left;
-    width: calc(100 - 500px);
+    width: 70%;
     height: 100%;
 }
 
