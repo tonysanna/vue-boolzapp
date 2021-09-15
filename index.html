@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>BOOLZAPP</title>
 </head>
@@ -30,7 +31,7 @@
                     </div>
                     <div class="text-notification">
                         <span>Ricevi notifiche di nuovi messaggi</span>
-                        <a href="">Attiva notifiche desktop</a>
+                        <a href="#">Attiva notifiche desktop</a>
                     </div>
                 </div>
                 <div class="search">
@@ -38,7 +39,7 @@
                         <i class="fas fa-search"></i>
                     </div>
                     <div class="input-search">
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model='search'>
                     </div>
                 </div>
                 <div class="contact">
@@ -69,13 +70,16 @@
                     </div>
                 </div>
                 <div class="chat">
-                    <div class="chat-space">
-                        <div></div>
+                    <div v-for='text in selectedContact?.message' class="chat-space">
+                        <div :class="text.status">  
+                            <p> {{text.message}}</p>
+                            <span id="data-chat">{{text.date}}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="messaggio">
+                <div class="message">
                     <i class="fas fa-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio">
+                    <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="addMessage()">
                     <i class="fas fa-microphone"></i>
                 </div>
             </div>

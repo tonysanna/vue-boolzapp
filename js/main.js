@@ -106,9 +106,30 @@ const app = new Vue ({
 
         LastMessage(contact) {
             if (contact.messages == null) {
-                return contact.messages[contact.messages.lenght - 1].message
-            };
+               return '';
+            }
+            return contact.messages[contact.messages.lenght - 1].message
+        },
 
+        addMessage() {
+            if(this.newMessage != '') {
+                let newMessage = this.newMessage;
+                let tmp = {
+                    date: fayjs().format('DD/MM/YYYY hh:mm:ss'),
+                    message: newMessage,
+                    status: 'sent',
+                };
+                this.selectedContact.messages.push(tmp);
+                this.newMessage = '';
+            }
+            setTimeout(() => {
+                let tmp = {
+                    date: dayjs().format('DD/MM/YYYY hh:mm:ss'),
+                    message: 'ok',
+                    status: 'received',
+                };
+                this.selectedContact.messages.push(tmp);
+            },2500);
         }
     }
 })
